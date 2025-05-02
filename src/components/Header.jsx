@@ -1,0 +1,33 @@
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { SearchContext } from './context/searchContext';
+
+const Header = () => {
+  const [category, setCategory] = useState('all');
+  const { setSearchTerm } = useContext(SearchContext);
+
+  const handleCategoryChange = (e) => {
+    const selected = e.target.value;
+    setCategory(selected);
+    console.log('Selected Category:', selected);
+    // Optionally: setSelectedCategory(selected); <-- if you add it to context later
+  };
+
+  return (
+    <header class="top-header glass">
+    <div class="logo">🛍️ DarkStore</div>
+    <div class="search-container">
+      <input type="text" placeholder="Search shoes..." />
+    </div>
+    <div class="icons">
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">Contact</a>
+      <a href="#" class="nav-link">Login</a>
+      <span class="icon">🛒</span>
+      <span class="icon">👤</span>
+    </div>
+  </header>
+  );
+};
+
+export default Header;
