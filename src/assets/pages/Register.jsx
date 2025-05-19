@@ -1,37 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle registration logic here (e.g., API call)
+    console.log('Registering:', formData);
+    alert('Account created successfully!');
+  };
+
   return (
     <Layout>
-    <div className="register-container">
-      <h2>Create Account</h2>
-
-      <form className="register-form">
-        <div className="form-group">
-          <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" placeholder="Enter your full name" required />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Create a password" required />
-        </div>
-
-        <button type="submit" className="register-btn">Register</button>
-      </form>
-
-      <p className="redirect-text">
-        Already have an account? <Link to="/signin">Sign In</Link>
-      </p>
-    </div>
+    <section className="register-section">
+      <div className="register-container">
+        <h1>Create Account</h1>
+        <form onSubmit={handleSubmit} className="register-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Register</button>
+        </form>
+        <p className="login-link">
+          Already have an account? <Link to="/login">Log in</Link>
+        </p>
+      </div>
+    </section>
     </Layout>
   );
 };

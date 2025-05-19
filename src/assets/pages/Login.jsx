@@ -1,35 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../../components/Layout';
 
-const SignIn = () => {
+
+const Login = () => {
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle login logic (e.g. API call)
+    console.log('Logging in with:', credentials);
+    alert('Login submitted');
+  };
+
   return (
     <Layout>
-    <div className="signin-container">
-      <h2>Sign In</h2>
-
-      <form className="signin-form">
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required />
-        </div>
-
-        <button type="submit" className="signin-btn">Sign In</button>
-      </form>
-
-      <p className="redirect-text">
-        Don't have an account? 
-        
-        <Link to="/register"> Register here</Link>
-      </p>
-    </div>
+    <section className="login-section">
+      <div className="login-container">
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+          <button type="submit">Log In</button>
+        </form>
+        <p className="register-link">
+          Not registered? <Link to="/register">Create an account</Link>
+        </p>
+      </div>
+    </section>
     </Layout>
   );
 };
 
-export default SignIn;
+export default Login;

@@ -15,14 +15,14 @@ const Header = () => {
 
   return (
     <header class="top-header glass">
-    <div class="logo">🛍️ DarkStore</div>
+    <Link to={'/'} class="logo">🛍️ DarkStore</Link>
     <div class="search-container">
       <input type="text" placeholder="Search shoes..." />
     </div>
     <div class="icons">
-      <a href="#" class="nav-link">About</a>
-      <a href="#" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Login</a>
+      <Link to={'/about'} class="nav-link">About</Link>
+      <Link to={'/contact'} class="nav-link">Contact</Link>
+     <Link to={'/login'} class="nav-link">Login</Link> 
       <span class="icon">🛒</span>
       <span class="icon">👤</span>
     </div>

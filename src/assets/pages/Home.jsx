@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import { Link } from 'react-router-dom';
 import { SearchContext } from '../../components/context/searchContext';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -44,8 +45,10 @@ const Home = () => {
   );
   
 
-  console.log(filteredProducts, "Filter Daa")
+  console.log(filteredProducts,"Filtered products")
 
+  console.log(filteredProducts, "Filter Daa")
+  const skeletonArray = Array(10).fill(null); 
   return (
     <Layout>
     <div className="container">
@@ -54,9 +57,7 @@ const Home = () => {
     <ul>
       <li><input type="radio" name="category" defaultChecked /> All</li>
       <li><input type="radio" name="category" /> Sneakers</li>
-      <li><input type="radio" name="category" /> Flats</li>
-      <li><input type="radio" name="category" /> Sandals</li>
-      <li><input type="radio" name="category" /> Heels</li>
+      
     </ul>
 
     <h3>Price</h3>
@@ -89,19 +90,31 @@ const Home = () => {
     </div>
 
     <div className="product-grid">
+  {loading ? (
+    <>
+      {skeletonArray.map((_, index) => (
+        <div className="product-card skeleton-card glass" key={index}>
+          <div className="skeleton-image" />
+          <div className="skeleton-title" />
+          <div className="skeleton-price" />
+          <div className="skeleton-button" />
+        </div>
+      ))}
+    </>
+  ) : (
+    <>
       {filteredProducts.map((item, index) => (
         <div className="product-card glass" key={index}>
-          <img
-            src={item.thumbnail}
-            alt="Shoe"
-          />
+          <Link to={`/detail/${item.id}`}><img src={item.thumbnail} alt={item.title} /></Link>
           <h4>{item.title}</h4>
-          {/* <p>⭐⭐⭐⭐☆ (123 reviews)</p> */}
           <p>${item.price}</p>
           <button className="add-to-cart">Add to Cart 🛒</button>
         </div>
       ))}
-    </div>
+    </>
+  )}
+</div>
+
   </main>
 </div>
 

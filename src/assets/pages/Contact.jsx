@@ -1,32 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '../../components/Layout';
 
+
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // For now, just log data (can be connected to backend or email service)
+    console.log('Form submitted:', formData);
+    alert("Thanks for contacting us!");
+    setFormData({ name: '', email: '', message: '' });
+  };
+
   return (
     <Layout>
-    <div className="contact-container">
-      <h2>Contact Us</h2>
-      <p>If you have any questions, feedback, or just want to say hello — feel free to drop us a message!</p>
-
-      <form className="contact-form">
-        <div className="form-group">
-          <label htmlFor="name">Your Name</label>
-          <input type="text" id="name" placeholder="Enter your name" required />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Your Email</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="message">Your Message</label>
-          <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
-        </div>
-
-        <button type="submit" className="contact-btn">Send Message</button>
-      </form>
-    </div>
+    <section className="contact-section">
+      <div className="contact-container">
+        <h1>Contact Us</h1>
+        <p>Have questions, feedback, or need help with an order? Reach out to us below.</p>
+        <form onSubmit={handleSubmit} className="contact-form">
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <textarea
+            name="message"
+            rows="5"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          ></textarea>
+          <button type="submit">Send Message ✉️</button>
+        </form>
+      </div>
+    </section>
     </Layout>
   );
 };
