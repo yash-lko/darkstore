@@ -6,12 +6,6 @@ const Header = () => {
   const [category, setCategory] = useState('all');
   const { setSearchTerm } = useContext(SearchContext);
 
-  const handleCategoryChange = (e) => {
-    const selected = e.target.value;
-    setCategory(selected);
-    console.log('Selected Category:', selected);
-    // Optionally: setSelectedCategory(selected); <-- if you add it to context later
-  };
 
   return (
     <header class="top-header glass">
