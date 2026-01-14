@@ -16,6 +16,7 @@ const Header = () => {
     <div class="icons">
       <Link to={'/about'} class="nav-link">About</Link>
       <Link to={'/contact'} class="nav-link">Contact</Link>
+       <Link to='#' class="nav-link">Services</Link>
      <Link to={'/login'} class="nav-link">Login</Link> 
       <span class="icon">🛒</span>
       <span class="icon">👤</span>
